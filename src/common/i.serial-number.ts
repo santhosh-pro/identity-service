@@ -1,0 +1,3 @@
+interface ISerialNumber {
+    sNo:number;
+}
