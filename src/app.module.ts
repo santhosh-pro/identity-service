@@ -1,4 +1,3 @@
-import { MessageQueueModule } from './infrastructure/message-queue/message-queue.module';
 import { UsecasesModule } from './use-cases/usecases.module';
 import { DatabaseModule } from './infrastructure/database/database.module';
 import { CommonModule } from './common/common.module';
@@ -13,7 +12,6 @@ import { RolePermissionEntity } from './infrastructure/database/role-permission/
 
 @Module({
 	imports: [
-		MessageQueueModule,
 		CommonModule,
 		TypeOrmModule.forRoot({
 			type: 'mysql',
