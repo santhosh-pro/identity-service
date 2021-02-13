@@ -17,7 +17,21 @@ export class SignInController {
     async create(@Body() body: SignInRequest): Promise<any> {
 
         const user = await this.userService.signIn(body.username, body.password);
-        const payload = { username: user.username, id: user.id, name: user.name,permissions:user.userRoles[0].role.name };
+        
+        const permissions:Array<string>=[];
+        user.userRoles.forEach(r=>{
+            r.role.rolePermissions.forEach(p=>{
+                permissions.push(p.permissionId)
+            })
+        })
+        
+        const payload = { 
+            username: user.username, 
+            id: user.id, 
+            name: user.name,
+            roles:user.userRoles.map(x=>x.roleId), 
+            permissions:permissions 
+        };
         return {
             token: this.jwtService.sign(payload),
         };

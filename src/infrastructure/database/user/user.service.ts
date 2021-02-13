@@ -4,8 +4,9 @@ import { BaseService } from "src/common/base.service";
 import { Repository } from "typeorm";
 import { UserEntity } from "./user.entity";
 import { IUserService } from "./i.user.service";
-import { nameof } from "src/common/utilities/nameof";
+import { nameof } from "src/common/utils/nameof";
 import { UserRoleEntity } from "../user-role/user-role.entity";
+import { RoleEntity } from "../role/role.entity";
 
 @Injectable()
 export class UserService extends BaseService<Repository<UserEntity>, UserEntity> implements IUserService {
@@ -24,11 +25,11 @@ export class UserService extends BaseService<Repository<UserEntity>, UserEntity>
   }
 
   async signIn(username: string, password: string): Promise<UserEntity> {
-    console.log(+nameof<UserEntity>(x=>x.userRoles));
 
     const user = await this.createQueryBuilder('u')
       .innerJoinAndSelect(`u.${nameof<UserEntity>(x=>x.userRoles)}`, 'ur')
       .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x=>x.role)}`, 'r')
+      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x=>x.rolePermissions)}`, 'rp')
       .where(`u.${nameof<UserEntity>(x=>x.username)}=:username`, { username: username })
       .getOne();
       
