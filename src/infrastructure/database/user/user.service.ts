@@ -27,12 +27,12 @@ export class UserService extends BaseService<Repository<UserEntity>, UserEntity>
   async signIn(username: string, password: string): Promise<UserEntity> {
 
     const user = await this.createQueryBuilder('u')
-      .innerJoinAndSelect(`u.${nameof<UserEntity>(x=>x.userRoles)}`, 'ur')
-      .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x=>x.role)}`, 'r')
-      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x=>x.rolePermissions)}`, 'rp')
-      .where(`u.${nameof<UserEntity>(x=>x.username)}=:username`, { username: username })
+      .innerJoinAndSelect(`u.${nameof<UserEntity>(x => x.userRoles)}`, 'ur')
+      .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x => x.role)}`, 'r')
+      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x => x.rolePermissions)}`, 'rp')
+      .where(`u.${nameof<UserEntity>(x => x.username)}=:username`, { username: username })
       .getOne();
-      
+
     if (!user || !(await user.comparePassword(password))) {
       throw new HttpException(
         'Invalid username/password',
@@ -40,7 +40,17 @@ export class UserService extends BaseService<Repository<UserEntity>, UserEntity>
       );
     }
     return user;
+  }
 
+  async hasPermission(userId: string, routePath: string): Promise<boolean> {
+    // const roleIds:string[]= this.getRoles(userId);
+    // const permissionIds:string[]= this.getPermissions(roleIds);
+    // const 
+    const hasPermission = this.createQueryBuilder('u')
+      .innerJoinAndSelect(`u.${nameof<UserEntity>(x => x.userRoles)}`, 'ur')
+      .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x => x.role)}`, 'r')
+      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x => x.rolePermissions)}`, 'rp')
+    return false;
   }
 
 }

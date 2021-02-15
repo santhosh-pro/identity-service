@@ -1,10 +1,10 @@
-import { BaseEntity } from "../../../common/base.entity";
+import { WhoColumnEntity } from "../../../common/base.entity";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { RoleEntity } from "../role/role.entity";
 import { PermissionEntity } from "../permission/permission.entity";
 
-@Entity({ name: 'role-permission' })
-export class RolePermissionEntity extends BaseEntity {
+@Entity({ name: 'role_permission' })
+export class RolePermissionEntity extends WhoColumnEntity {
 
   @Column()
   roleId!: string;

@@ -9,6 +9,9 @@ import { RoleEntity } from './infrastructure/database/role/role.entity';
 import { UserRoleEntity } from './infrastructure/database/user-role/user-role.entity';
 import { PermissionEntity } from './infrastructure/database/permission/permission.entity';
 import { RolePermissionEntity } from './infrastructure/database/role-permission/role-permission.entity';
+import { RouteEntity } from './infrastructure/database/route/route.entity';
+import { RoutePermissionEntity } from './infrastructure/database/route-permission/route-permission.entity';
+import { MenuEntity } from './infrastructure/database/menu/menu.entity';
 
 @Module({
 	imports: [
@@ -25,7 +28,10 @@ import { RolePermissionEntity } from './infrastructure/database/role-permission/
 				RoleEntity,
 				UserRoleEntity,
 				PermissionEntity,
-				RolePermissionEntity
+				RolePermissionEntity,
+				RouteEntity,
+				RoutePermissionEntity,
+				MenuEntity
 			],
 			synchronize: true,
 			logging: ["query", "error"],
