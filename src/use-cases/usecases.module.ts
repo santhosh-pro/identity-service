@@ -7,6 +7,7 @@ import { SignUpController } from './sign-up/sign-up.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { jwtConstants, JwtStrategy } from 'src/use-cases/jwt.strategy';
+import { RefreshTokenController } from './refresh-token/refresh-token.controller';
 @Module({
     imports: [
         CommonModule,
@@ -14,12 +15,13 @@ import { jwtConstants, JwtStrategy } from 'src/use-cases/jwt.strategy';
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.register({
             secret: jwtConstants.secret,
-            signOptions: { expiresIn: '1d' },
+            signOptions: { expiresIn: '60s' },
         }),
     ],
     controllers: [
         SignInController,
-        SignUpController
+        SignUpController,
+        RefreshTokenController
     ],
     providers: [
         JwtStrategy,

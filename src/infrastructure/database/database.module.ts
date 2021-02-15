@@ -11,6 +11,8 @@ import { RoleEntity } from './role/role.entity';
 import { RoutePermissionEntity } from './route-permission/route-permission.entity';
 import { RouteEntity } from './route/route.entity';
 import { UserRoleEntity } from './user-role/user-role.entity';
+import { RefreshTokenService } from './refresh-token/refresh-token.service';
+import { RefreshTokenEntity } from './refresh-token/refresh-token.entity';
 
 @Module({
     imports: [
@@ -23,7 +25,8 @@ import { UserRoleEntity } from './user-role/user-role.entity';
             RolePermissionEntity,
             RouteEntity,
             RoutePermissionEntity,
-            MenuEntity
+            MenuEntity,
+            RefreshTokenEntity
         ])
     ],
     providers: [
@@ -32,6 +35,11 @@ import { UserRoleEntity } from './user-role/user-role.entity';
             provide: 'IUserService',
             useClass: UserService
         },
+        {
+            provide: 'IRefreshTokenService',
+            useClass: RefreshTokenService
+        },
+        
     ],
     exports: [
         TypeOrmModule.forFeature([
@@ -42,12 +50,17 @@ import { UserRoleEntity } from './user-role/user-role.entity';
             RolePermissionEntity,
             RouteEntity,
             RoutePermissionEntity,
-            MenuEntity
+            MenuEntity,
+            RefreshTokenEntity
         ]),
         UnitOfWork,
         {
             provide: 'IUserService',
             useClass: UserService
+        },
+        {
+            provide: 'IRefreshTokenService',
+            useClass: RefreshTokenService
         },
     ]
 })

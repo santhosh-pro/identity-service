@@ -12,6 +12,8 @@ import { RolePermissionEntity } from './infrastructure/database/role-permission/
 import { RouteEntity } from './infrastructure/database/route/route.entity';
 import { RoutePermissionEntity } from './infrastructure/database/route-permission/route-permission.entity';
 import { MenuEntity } from './infrastructure/database/menu/menu.entity';
+import { RefreshTokenEntity } from './infrastructure/database/refresh-token/refresh-token.entity';
+import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Module({
 	imports: [
@@ -31,7 +33,8 @@ import { MenuEntity } from './infrastructure/database/menu/menu.entity';
 				RolePermissionEntity,
 				RouteEntity,
 				RoutePermissionEntity,
-				MenuEntity
+				MenuEntity,
+				RefreshTokenEntity
 			],
 			synchronize: true,
 			logging: ["query", "error"],
