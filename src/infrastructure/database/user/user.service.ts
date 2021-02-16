@@ -2,16 +2,16 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { Repository } from "typeorm";
-import { UserEntity } from "./user.entity";
+import { User } from "./user.entity";
 import { IUserService } from "./i.user.service";
 import { nameof } from "src/common/utils/nameof";
-import { UserRoleEntity } from "../user-role/user-role.entity";
-import { RoleEntity } from "../role/role.entity";
+import { UserRole } from "../user-role/user-role.entity";
+import { Role } from "../role/role.entity";
 
 @Injectable()
-export class UserService extends BaseService<Repository<UserEntity>, UserEntity> implements IUserService {
+export class UserService extends BaseService<Repository<User>, User> implements IUserService {
   constructor(
-    @InjectRepository(UserEntity) protected readonly repository: Repository<UserEntity>
+    @InjectRepository(User) protected readonly repository: Repository<User>
   ) {
     super(repository);
   }
@@ -24,13 +24,13 @@ export class UserService extends BaseService<Repository<UserEntity>, UserEntity>
     return true;
   }
 
-  async signIn(username: string, password: string): Promise<UserEntity> {
+  async signIn(username: string, password: string): Promise<User> {
 
     const user = await this.createQueryBuilder('u')
-      .innerJoinAndSelect(`u.${nameof<UserEntity>(x => x.userRoles)}`, 'ur')
-      .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x => x.role)}`, 'r')
-      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x => x.rolePermissions)}`, 'rp')
-      .where(`u.${nameof<UserEntity>(x => x.username)}=:username`, { username: username })
+      .innerJoinAndSelect(`u.${nameof<User>(x => x.userRoles)}`, 'ur')
+      .innerJoinAndSelect(`ur.${nameof<UserRole>(x => x.role)}`, 'r')
+      .innerJoinAndSelect(`r.${nameof<Role>(x => x.rolePermissions)}`, 'rp')
+      .where(`u.${nameof<User>(x => x.username)}=:username`, { username: username })
       .getOne();
 
     if (!user || !(await user.comparePassword(password))) {
@@ -47,9 +47,9 @@ export class UserService extends BaseService<Repository<UserEntity>, UserEntity>
     // const permissionIds:string[]= this.getPermissions(roleIds);
     // const 
     const hasPermission = this.createQueryBuilder('u')
-      .innerJoinAndSelect(`u.${nameof<UserEntity>(x => x.userRoles)}`, 'ur')
-      .innerJoinAndSelect(`ur.${nameof<UserRoleEntity>(x => x.role)}`, 'r')
-      .innerJoinAndSelect(`r.${nameof<RoleEntity>(x => x.rolePermissions)}`, 'rp')
+      .innerJoinAndSelect(`u.${nameof<User>(x => x.userRoles)}`, 'ur')
+      .innerJoinAndSelect(`ur.${nameof<UserRole>(x => x.role)}`, 'r')
+      .innerJoinAndSelect(`r.${nameof<Role>(x => x.rolePermissions)}`, 'rp')
     return false;
   }
 

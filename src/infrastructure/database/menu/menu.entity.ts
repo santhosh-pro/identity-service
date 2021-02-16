@@ -1,9 +1,9 @@
 import { WhoColumnEntity } from "src/common/base.entity";
 import { Column, Entity, ManyToOne } from "typeorm";
-import { RouteEntity } from "../route/route.entity";
+import { Route } from "../route/route.entity";
 
-@Entity({ name: 'menu' })
-export class MenuEntity extends WhoColumnEntity {
+@Entity()
+export class Menu extends WhoColumnEntity {
 
   @Column()
   name!: string;
@@ -14,8 +14,8 @@ export class MenuEntity extends WhoColumnEntity {
   @Column({nullable:true})
   routeId!: string;
 
-  @ManyToOne(() => RouteEntity, route => route.menus)
-  route!:RouteEntity;
+  @ManyToOne(() => Route, route => route.menus)
+  route!:Route;
 
 
 }

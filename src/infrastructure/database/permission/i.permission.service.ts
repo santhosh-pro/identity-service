@@ -1,6 +1,6 @@
 import { IBaseService } from "src/common/i.base.service";
-import { PermissionEntity } from "./permission.entity";
+import { Permission } from "./permission.entity";
 
-export interface IPermissionService extends IBaseService<PermissionEntity>{
+export interface IPermissionService extends IBaseService<Permission>{
     
 }

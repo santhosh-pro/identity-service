@@ -1,10 +1,10 @@
 import { WhoColumnEntity } from "../../../common/base.entity";
 import { Column, Entity, OneToMany } from "typeorm";
-import { RolePermissionEntity } from "../role-permission/role-permission.entity";
-import { RoutePermissionEntity } from "../route-permission/route-permission.entity";
+import { RolePermission } from "../role-permission/role-permission.entity";
+import { RoutePermission } from "../route-permission/route-permission.entity";
 
-@Entity({ name: 'permission' })
-export class PermissionEntity extends WhoColumnEntity {
+@Entity()
+export class Permission extends WhoColumnEntity {
 
   @Column()
   name!: string;
@@ -12,10 +12,10 @@ export class PermissionEntity extends WhoColumnEntity {
   @Column()
   description!: string;
 
-  @OneToMany(() => RolePermissionEntity, rolePermission => rolePermission.permission)
-  rolePermissions!:RolePermissionEntity[]
+  @OneToMany(() => RolePermission, rolePermission => rolePermission.permission)
+  rolePermissions!:RolePermission[]
 
-  @OneToMany(() => RoutePermissionEntity, routePermission => routePermission.permission)
-  routePermissions!:RoutePermissionEntity[]
+  @OneToMany(() => RoutePermission, routePermission => routePermission.permission)
+  routePermissions!:RoutePermission[]
   
 }

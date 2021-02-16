@@ -1,6 +1,6 @@
 import { IBaseService } from "src/common/i.base.service";
-import { UserRoleEntity } from "./user-role.entity";
+import { UserRole } from "./user-role.entity";
 
-export interface IUserRoleService extends IBaseService<UserRoleEntity>{ 
+export interface IUserRoleService extends IBaseService<UserRole>{ 
     
 }

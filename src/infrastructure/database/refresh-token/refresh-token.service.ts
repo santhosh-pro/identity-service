@@ -3,13 +3,13 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { Repository } from "typeorm";
 import { IRefreshTokenService } from "./i.refresh-token.service";
-import { RefreshTokenEntity } from "./refresh-token.entity";
+import { RefreshToken } from "./refresh-token.entity";
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class RefreshTokenService extends BaseService<Repository<RefreshTokenEntity>, RefreshTokenEntity> implements IRefreshTokenService {
+export class RefreshTokenService extends BaseService<Repository<RefreshToken>, RefreshToken> implements IRefreshTokenService {
     constructor(
-        @InjectRepository(RefreshTokenEntity) protected readonly repository: Repository<RefreshTokenEntity>
+        @InjectRepository(RefreshToken) protected readonly repository: Repository<RefreshToken>
     ) {
         super(repository);
     }
@@ -17,7 +17,7 @@ export class RefreshTokenService extends BaseService<Repository<RefreshTokenEnti
     async generateRefreshToken(accessToken: string, username: string): Promise<string> {
         const salt = await bcrypt.genSalt(10)
 
-        const refreshToken = new RefreshTokenEntity()
+        const refreshToken = new RefreshToken()
         refreshToken.username = username
         refreshToken.hash = await bcrypt.hash(accessToken.split('.')[2] + salt, salt)
 
@@ -31,7 +31,7 @@ export class RefreshTokenService extends BaseService<Repository<RefreshTokenEnti
     }
 
 
-    async validateRefreshToken(oldAccessToken: string, oldRefreshToken: string): Promise<RefreshTokenEntity> {
+    async validateRefreshToken(oldAccessToken: string, oldRefreshToken: string): Promise<RefreshToken> {
         
         const refreshTokenHash = await bcrypt.hash(oldAccessToken.split('.')[2] + oldRefreshToken, oldRefreshToken)
         const refreshToken = await this.findOne({ hash: refreshTokenHash })

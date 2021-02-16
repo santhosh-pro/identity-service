@@ -3,12 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { Repository } from "typeorm";
 import { IRoleService } from "./i.role.service";
-import { RoleEntity } from "./role.entity";
+import { Role } from "./role.entity";
 
 @Injectable()
-export class UserService extends BaseService<Repository<RoleEntity>, RoleEntity> implements IRoleService {
+export class UserService extends BaseService<Repository<Role>, Role> implements IRoleService {
     constructor(
-        @InjectRepository(RoleEntity) protected readonly repository: Repository<RoleEntity>
+        @InjectRepository(Role) protected readonly repository: Repository<Role>
     ) {
         super(repository);
     }

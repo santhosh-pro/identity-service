@@ -1,6 +1,6 @@
 import { IBaseService } from "../../../common/i.base.service";
-import { RolePermissionEntity } from "./role-permission.entity";
+import { RolePermission } from "./role-permission.entity";
 
-export interface IRolePermissionService extends IBaseService<RolePermissionEntity>{
+export interface IRolePermissionService extends IBaseService<RolePermission>{
     
 }

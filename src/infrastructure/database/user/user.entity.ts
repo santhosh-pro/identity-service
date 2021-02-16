@@ -1,10 +1,10 @@
 import { WhoColumnEntity } from 'src/common/base.entity';
 import { Entity, Column, BeforeInsert, ManyToOne, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcrypt'
-import { UserRoleEntity } from '../user-role/user-role.entity';
+import { UserRole } from '../user-role/user-role.entity';
 
-@Entity({ name: 'user' })
-export class UserEntity extends WhoColumnEntity {
+@Entity()
+export class User extends WhoColumnEntity {
 
   @Column()
   name!: string;
@@ -20,8 +20,8 @@ export class UserEntity extends WhoColumnEntity {
   @Column({ length: 60 })
   password!: string;
 
-  @OneToMany(() => UserRoleEntity, userRole => userRole.user)
-  userRoles!:UserRoleEntity[]
+  @OneToMany(() => UserRole, userRole => userRole.user)
+  userRoles!:UserRole[]
 
   @BeforeInsert()
   async hashPassword() {

@@ -1,7 +1,7 @@
 import { IBaseService } from "src/common/i.base.service";
-import { RefreshTokenEntity } from "./refresh-token.entity";
+import { RefreshToken } from "./refresh-token.entity";
 
-export interface IRefreshTokenService extends IBaseService<RefreshTokenEntity>{
-    validateRefreshToken(oldAccessToken: string, oldRefreshToken: string): Promise<RefreshTokenEntity>;
+export interface IRefreshTokenService extends IBaseService<RefreshToken>{
+    validateRefreshToken(oldAccessToken: string, oldRefreshToken: string): Promise<RefreshToken>;
     generateRefreshToken(accessToken: string, username: string): Promise<string>;
 }

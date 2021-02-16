@@ -1,10 +1,10 @@
 import { WhoColumnEntity } from "src/common/base.entity";
 import { Column, Entity, OneToMany } from "typeorm";
-import { MenuEntity } from "../menu/menu.entity";
-import { RoutePermissionEntity } from "../route-permission/route-permission.entity";
+import { Menu } from "../menu/menu.entity";
+import { RoutePermission } from "../route-permission/route-permission.entity";
 
-@Entity({ name: 'route' })
-export class RouteEntity extends WhoColumnEntity {
+@Entity()
+export class Route extends WhoColumnEntity {
 
   @Column()
   path!: string;
@@ -12,9 +12,9 @@ export class RouteEntity extends WhoColumnEntity {
   @Column()
   description!: string;
 
-  @OneToMany(() => RoutePermissionEntity, routePermission => routePermission.permission)
-  routePermissions!:RoutePermissionEntity[]
+  @OneToMany(() => RoutePermission, routePermission => routePermission.permission)
+  routePermissions!:RoutePermission[]
 
-  @OneToMany(() => MenuEntity, menu => menu.route)
-  menus!:MenuEntity[]
+  @OneToMany(() => Menu, menu => menu.route)
+  menus!:Menu[]
 }

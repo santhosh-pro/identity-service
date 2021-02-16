@@ -1,10 +1,10 @@
 import { WhoColumnEntity } from "src/common/base.entity";
 import {Column, Entity, ManyToOne } from "typeorm";
-import { RoleEntity } from "../role/role.entity";
-import { UserEntity } from "../user/user.entity";
+import { Role } from "../role/role.entity";
+import { User } from "../user/user.entity";
 
-@Entity({ name: 'user_role' })
-export class UserRoleEntity extends WhoColumnEntity {
+@Entity()
+export class UserRole extends WhoColumnEntity {
 
   @Column()
   userId!: string;
@@ -12,9 +12,9 @@ export class UserRoleEntity extends WhoColumnEntity {
   @Column()
   roleId!: string;
 
-  @ManyToOne(() => UserEntity, user => user.userRoles)
-  user!:UserEntity;
+  @ManyToOne(() => User, user => user.userRoles)
+  user!:User;
 
-  @ManyToOne(() => RoleEntity, role => role.userRoles)
-  role!:RoleEntity
+  @ManyToOne(() => Role, role => role.userRoles)
+  role!:Role
 }

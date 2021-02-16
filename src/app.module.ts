@@ -3,16 +3,16 @@ import { DatabaseModule } from './infrastructure/database/database.module';
 import { CommonModule } from './common/common.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './infrastructure/database/user/user.entity';
+import { User } from './infrastructure/database/user/user.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
-import { RoleEntity } from './infrastructure/database/role/role.entity';
-import { UserRoleEntity } from './infrastructure/database/user-role/user-role.entity';
-import { PermissionEntity } from './infrastructure/database/permission/permission.entity';
-import { RolePermissionEntity } from './infrastructure/database/role-permission/role-permission.entity';
-import { RouteEntity } from './infrastructure/database/route/route.entity';
-import { RoutePermissionEntity } from './infrastructure/database/route-permission/route-permission.entity';
-import { MenuEntity } from './infrastructure/database/menu/menu.entity';
-import { RefreshTokenEntity } from './infrastructure/database/refresh-token/refresh-token.entity';
+import { Role } from './infrastructure/database/role/role.entity';
+import { UserRole } from './infrastructure/database/user-role/user-role.entity';
+import { Permission } from './infrastructure/database/permission/permission.entity';
+import { RolePermission } from './infrastructure/database/role-permission/role-permission.entity';
+import { Route } from './infrastructure/database/route/route.entity';
+import { RoutePermission } from './infrastructure/database/route-permission/route-permission.entity';
+import { Menu } from './infrastructure/database/menu/menu.entity';
+import { RefreshToken } from './infrastructure/database/refresh-token/refresh-token.entity';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Module({
@@ -26,15 +26,15 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 			password: 'computer',
 			database: 'identity',
 			entities: [
-				UserEntity,
-				RoleEntity,
-				UserRoleEntity,
-				PermissionEntity,
-				RolePermissionEntity,
-				RouteEntity,
-				RoutePermissionEntity,
-				MenuEntity,
-				RefreshTokenEntity
+				User,
+				Role,
+				UserRole,
+				Permission,
+				RolePermission,
+				Route,
+				RoutePermission,
+				Menu,
+				RefreshToken
 			],
 			synchronize: true,
 			logging: ["query", "error"],
