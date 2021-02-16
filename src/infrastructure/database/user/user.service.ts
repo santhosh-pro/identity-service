@@ -27,9 +27,9 @@ export class UserService extends BaseService<Repository<User>, User> implements 
   async signIn(username: string, password: string): Promise<User> {
 
     const user = await this.createQueryBuilder('u')
-      .innerJoinAndSelect(`u.${nameof<User>(x => x.userRoles)}`, 'ur')
-      .innerJoinAndSelect(`ur.${nameof<UserRole>(x => x.role)}`, 'r')
-      .innerJoinAndSelect(`r.${nameof<Role>(x => x.rolePermissions)}`, 'rp')
+      .leftJoinAndSelect(`u.${nameof<User>(x => x.userRoles)}`, 'ur')
+      .leftJoinAndSelect(`ur.${nameof<UserRole>(x => x.role)}`, 'r')
+      .leftJoinAndSelect(`r.${nameof<Role>(x => x.rolePermissions)}`, 'rp')
       .where(`u.${nameof<User>(x => x.username)}=:username`, { username: username })
       .getOne();
 
