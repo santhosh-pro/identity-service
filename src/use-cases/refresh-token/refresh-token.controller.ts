@@ -33,7 +33,7 @@ export class RefreshTokenController {
         }
 
         @Post('test') 
-        test():string {
-            return 'works';
+        test():any {
+            return {text:'work'};
         }
 }

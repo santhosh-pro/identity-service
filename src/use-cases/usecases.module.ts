@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { jwtConstants, JwtStrategy } from 'src/use-cases/jwt.strategy';
 import { RefreshTokenController } from './refresh-token/refresh-token.controller';
+import { SignOutController } from './sign-out/sign-out.controller';
 @Module({
     imports: [
         CommonModule,
@@ -21,7 +22,8 @@ import { RefreshTokenController } from './refresh-token/refresh-token.controller
     controllers: [
         SignInController,
         SignUpController,
-        RefreshTokenController
+        RefreshTokenController,
+        SignOutController
     ],
     providers: [
         JwtStrategy,
