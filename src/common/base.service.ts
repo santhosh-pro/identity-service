@@ -1,9 +1,7 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
 import { EntityManager, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
 import { IBaseService } from "./i.base.service";
 import { PagedResponse } from "./paged-response";
 import { SortingDirection } from "./sorting-direction";
-import { StringUtility } from "./utils/string-utility";
 
 export class BaseService<TRepository extends Repository<Entity>, Entity> implements IBaseService<Entity>{
     constructor(protected readonly repository: TRepository) {

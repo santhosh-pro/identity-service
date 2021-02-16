@@ -1,4 +1,4 @@
-export class StringUtility {
+export class StringUtil {
 
     public static hashCodeForString(text: string): number {
       let hash = 0;
@@ -25,14 +25,14 @@ export class StringUtility {
     }
   
     public static intersect<T>(set1: Set<T>, set2: Set<T>): Set<T> {
-      return new Set(StringUtility.toArray(set1).filter((x) => set2.has(x)));
+      return new Set(StringUtil.toArray(set1).filter((x) => set2.has(x)));
     }
   
     public static difference<T>(set1: Set<T>, set2: Set<T>): Set<T> {
-      return new Set(StringUtility.toArray(set1).filter((x) => !set2.has(x)));
+      return new Set(StringUtil.toArray(set1).filter((x) => !set2.has(x)));
     }
   
     public static union<T>(set1: Set<T>, set2: Set<T>): Set<T> {
-      return new Set([...StringUtility.toArray(set1), ...StringUtility.toArray(set2)]);
+      return new Set([...StringUtil.toArray(set1), ...StringUtil.toArray(set2)]);
     }
   }
