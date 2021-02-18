@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export class WhoColumnEntity {
+export class AuditColumn {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
     

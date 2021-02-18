@@ -14,6 +14,7 @@ import { RoutePermission } from './infrastructure/database/route-permission/rout
 import { Menu } from './infrastructure/database/menu/menu.entity';
 import { RefreshToken } from './infrastructure/database/refresh-token/refresh-token.entity';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { Application } from './infrastructure/database/application/application.entity';
 
 @Module({
 	imports: [
@@ -34,7 +35,8 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 				Route,
 				RoutePermission,
 				Menu,
-				RefreshToken
+				RefreshToken,
+				Application
 			],
 			synchronize: true,
 			logging: ["query", "error"],

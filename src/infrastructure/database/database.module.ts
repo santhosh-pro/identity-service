@@ -13,6 +13,8 @@ import { Route } from './route/route.entity';
 import { UserRole } from './user-role/user-role.entity';
 import { RefreshTokenService } from './refresh-token/refresh-token.service';
 import { RefreshToken } from './refresh-token/refresh-token.entity';
+import { Application } from './application/application.entity';
+import { MenuService } from './menu/menu.service';
 
 @Module({
     imports: [
@@ -26,7 +28,8 @@ import { RefreshToken } from './refresh-token/refresh-token.entity';
             Route,
             RoutePermission,
             Menu,
-            RefreshToken
+            RefreshToken,
+            Application
         ])
     ],
     providers: [
@@ -39,6 +42,10 @@ import { RefreshToken } from './refresh-token/refresh-token.entity';
             provide: 'IRefreshTokenService',
             useClass: RefreshTokenService
         },
+        {
+            provide: 'IMenuService',
+            useClass: MenuService
+        }
         
     ],
     exports: [
@@ -51,7 +58,8 @@ import { RefreshToken } from './refresh-token/refresh-token.entity';
             Route,
             RoutePermission,
             Menu,
-            RefreshToken
+            RefreshToken,
+            Application
         ]),
         UnitOfWork,
         {
@@ -62,6 +70,10 @@ import { RefreshToken } from './refresh-token/refresh-token.entity';
             provide: 'IRefreshTokenService',
             useClass: RefreshTokenService
         },
+        {
+            provide: 'IMenuService',
+            useClass: MenuService
+        }
     ]
 })
 export class DatabaseModule { }

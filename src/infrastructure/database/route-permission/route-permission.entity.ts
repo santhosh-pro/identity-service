@@ -1,10 +1,10 @@
-import { WhoColumnEntity } from "src/common/base.entity";
+import { AuditColumn } from "src/common/audit-column.entity";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { Permission } from "../permission/permission.entity";
 import { Route } from "../route/route.entity";
 
 @Entity()
-export class RoutePermission extends WhoColumnEntity {
+export class RoutePermission extends AuditColumn {
 
   @Column()
   routeId!: string;

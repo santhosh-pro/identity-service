@@ -9,6 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { jwtConstants, JwtStrategy } from 'src/use-cases/jwt.strategy';
 import { RefreshTokenController } from './refresh-token/refresh-token.controller';
 import { SignOutController } from './sign-out/sign-out.controller';
+import { GetMenuListController } from './get-menu-list/get-menu-list.controller';
 @Module({
     imports: [
         CommonModule,
@@ -23,7 +24,8 @@ import { SignOutController } from './sign-out/sign-out.controller';
         SignInController,
         SignUpController,
         RefreshTokenController,
-        SignOutController
+        SignOutController,
+        GetMenuListController
     ],
     providers: [
         JwtStrategy,

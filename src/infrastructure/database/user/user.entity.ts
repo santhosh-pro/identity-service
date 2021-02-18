@@ -1,10 +1,10 @@
-import { WhoColumnEntity } from 'src/common/base.entity';
+import { AuditColumn } from 'src/common/audit-column.entity';
 import { Entity, Column, BeforeInsert, ManyToOne, OneToMany } from 'typeorm';
 import * as bcrypt from 'bcrypt'
 import { UserRole } from '../user-role/user-role.entity';
 
 @Entity()
-export class User extends WhoColumnEntity {
+export class User extends AuditColumn {
 
   @Column()
   name!: string;
