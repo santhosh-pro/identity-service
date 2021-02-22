@@ -15,4 +15,7 @@ export class AuditColumn {
 
     @Column({select: false})
     updatedOn!: Date;
+    
+    @Column({select: false})
+    tenantId!:string
 }
