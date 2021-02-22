@@ -8,7 +8,7 @@ import { nameof } from "src/common/utils/nameof";
 import { UserRole } from "../user-role/user-role.entity";
 import { Role } from "../role/role.entity";
 import { TenantService } from "../tenant/tenant-service.decorator";
-import { TENANT_CONNECTION } from "../database.module";
+import { TENANT_CONNECTION } from "../tenant/tenant.module";
 
 @Injectable()
 @TenantService()

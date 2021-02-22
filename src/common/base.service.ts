@@ -1,8 +1,8 @@
+import { TenantService } from "src/infrastructure/database/tenant/tenant-service.decorator";
 import { EntityManager, FindConditions, FindOneOptions, getConnection, Repository, SelectQueryBuilder, UpdateResult } from "typeorm";
 import { IBaseService } from "./i.base.service";
 import { PagedResponse } from "./paged-response";
 import { SortingDirection } from "./sorting-direction";
-
 export class BaseService<TRepository extends Repository<Entity>, Entity> implements IBaseService<Entity>{
     constructor(protected readonly repository: TRepository) {
     }

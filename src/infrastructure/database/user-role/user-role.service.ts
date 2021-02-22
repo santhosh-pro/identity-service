@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { Repository } from "typeorm";
 import { TenantService } from "../tenant/tenant-service.decorator";
+import { TENANT_CONNECTION } from "../tenant/tenant.module";
 import { IUserRoleService } from "./i.user-role.service";
 import { UserRole } from "./user-role.entity";
 
@@ -10,7 +11,7 @@ import { UserRole } from "./user-role.entity";
 @TenantService()
 export class UserRoleService extends BaseService<Repository<UserRole>, UserRole> implements IUserRoleService {
   constructor(
-    @InjectRepository(UserRole) protected readonly repository: Repository<UserRole>
+    @Inject(TENANT_CONNECTION) @InjectRepository(UserRole) protected readonly repository: Repository<UserRole>
   ) {
     super(repository);
   } 

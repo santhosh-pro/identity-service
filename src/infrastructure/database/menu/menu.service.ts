@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { SortingDirection } from "src/common/sorting-direction";
 import { Repository } from "typeorm";
 import { TenantService } from "../tenant/tenant-service.decorator";
+import { TENANT_CONNECTION } from "../tenant/tenant.module";
 import { IMenuService } from "./i.menu.service";
 import { Menu } from "./menu.entity";
 
@@ -11,7 +12,7 @@ import { Menu } from "./menu.entity";
 @TenantService()
 export class MenuService extends BaseService<Repository<Menu>, Menu> implements IMenuService {
   constructor(
-    @InjectRepository(Menu) protected readonly repository: Repository<Menu>
+    @Inject(TENANT_CONNECTION) @InjectRepository(Menu) protected readonly repository: Repository<Menu>
   ) {
     super(repository);
   }
