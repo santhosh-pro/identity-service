@@ -40,7 +40,7 @@ export class BaseService<TRepository extends Repository<Entity>, Entity> impleme
   
 
     create(record: Partial<Entity>) {
-      const doc = this.repository.create(record as Entity);
+      const doc =this.repository.create(record as Entity);
       return this.repository.save(doc);
     }
   

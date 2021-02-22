@@ -5,6 +5,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
 import { Tenant } from './infrastructure/database/tenant/tenant.entity';
+import { DatabaseModule } from './infrastructure/database/database.module';
 
 @Module({
 	imports: [
@@ -24,7 +25,7 @@ import { Tenant } from './infrastructure/database/tenant/tenant.entity';
 			logging: ["query", "error"],
 			namingStrategy: new SnakeNamingStrategy(),
 		}),
-		//DatabaseModule,
+		DatabaseModule,
 		UsecasesModule,
 	],
 	providers: [],

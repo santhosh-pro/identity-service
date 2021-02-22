@@ -14,7 +14,7 @@ import { TENANT_CONNECTION } from "../tenant/tenant.module";
 @TenantService()
 export class UserService extends BaseService<Repository<User>, User> implements IUserService {
   constructor(
-     @Inject(TENANT_CONNECTION) @InjectRepository(User) protected readonly repository: Repository<User>
+     @Inject(TENANT_CONNECTION) protected readonly repository: Repository<User>
   ) {
     super(repository);
   }
