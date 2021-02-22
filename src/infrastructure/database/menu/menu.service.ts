@@ -3,10 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
 import { SortingDirection } from "src/common/sorting-direction";
 import { Repository } from "typeorm";
+import { TenantService } from "../tenant/tenant-service.decorator";
 import { IMenuService } from "./i.menu.service";
 import { Menu } from "./menu.entity";
 
 @Injectable()
+@TenantService()
 export class MenuService extends BaseService<Repository<Menu>, Menu> implements IMenuService {
   constructor(
     @InjectRepository(Menu) protected readonly repository: Repository<Menu>

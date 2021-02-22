@@ -1,17 +1,20 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BaseService } from "src/common/base.service";
-import { Repository } from "typeorm";
+import { Connection, Repository } from "typeorm";
 import { User } from "./user.entity";
 import { IUserService } from "./i.user.service";
 import { nameof } from "src/common/utils/nameof";
 import { UserRole } from "../user-role/user-role.entity";
 import { Role } from "../role/role.entity";
+import { TenantService } from "../tenant/tenant-service.decorator";
+import { TENANT_CONNECTION } from "../database.module";
 
 @Injectable()
+@TenantService()
 export class UserService extends BaseService<Repository<User>, User> implements IUserService {
   constructor(
-    @InjectRepository(User) protected readonly repository: Repository<User>
+     @Inject(TENANT_CONNECTION) @InjectRepository(User) protected readonly repository: Repository<User>
   ) {
     super(repository);
   }

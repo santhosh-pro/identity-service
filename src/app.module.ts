@@ -1,20 +1,10 @@
 import { UsecasesModule } from './use-cases/usecases.module';
-import { DatabaseModule } from './infrastructure/database/database.module';
 import { CommonModule } from './common/common.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './infrastructure/database/user/user.entity';
 import { SnakeNamingStrategy } from './common/snake-naming.strategy';
-import { Role } from './infrastructure/database/role/role.entity';
-import { UserRole } from './infrastructure/database/user-role/user-role.entity';
-import { Permission } from './infrastructure/database/permission/permission.entity';
-import { RolePermission } from './infrastructure/database/role-permission/role-permission.entity';
-import { Route } from './infrastructure/database/route/route.entity';
-import { RoutePermission } from './infrastructure/database/route-permission/route-permission.entity';
-import { Menu } from './infrastructure/database/menu/menu.entity';
-import { RefreshToken } from './infrastructure/database/refresh-token/refresh-token.entity';
-import { JwtAuthGuard } from './jwt-auth.guard';
-import { Application } from './infrastructure/database/application/application.entity';
+import { Tenant } from './infrastructure/database/tenant/tenant.entity';
+import { DatabaseModule } from './infrastructure/database/database.module';
 
 @Module({
 	imports: [
@@ -25,25 +15,16 @@ import { Application } from './infrastructure/database/application/application.e
 			port: 3306,
 			username: 'root',
 			password: 'computer',
-			database: 'identity',
+			database: 'tenant',
 			entities: [
-				User,
-				Role,
-				UserRole,
-				Permission,
-				RolePermission,
-				Route,
-				RoutePermission,
-				Menu,
-				RefreshToken,
-				Application
+				Tenant
 			],
 			synchronize: true,
 			logging: ["query", "error"],
 			namingStrategy: new SnakeNamingStrategy(),
 		}),
-		UsecasesModule,
 		DatabaseModule,
+		UsecasesModule,
 	],
 	providers: [],
 })

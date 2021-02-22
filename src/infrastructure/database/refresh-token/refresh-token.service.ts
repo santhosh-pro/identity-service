@@ -5,8 +5,10 @@ import { Repository } from "typeorm";
 import { IRefreshTokenService } from "./i.refresh-token.service";
 import { RefreshToken } from "./refresh-token.entity";
 import * as bcrypt from 'bcrypt';
+import { TenantService } from "../tenant/tenant-service.decorator";
 
 @Injectable()
+@TenantService()
 export class RefreshTokenService extends BaseService<Repository<RefreshToken>, RefreshToken> implements IRefreshTokenService {
     constructor(
         @InjectRepository(RefreshToken) protected readonly repository: Repository<RefreshToken>
